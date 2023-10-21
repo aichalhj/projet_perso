@@ -1,4 +1,5 @@
 import requests
+import matplotlib.pyplot as plt
 
 def get_weather_data():
     # URL de requête météo
@@ -13,9 +14,11 @@ def get_weather_data():
     else:
         print("Échec de la requête météo. Code d'état :", response.status_code)
 
-if __name__ == "__main__":
-    while True:
-        get_weather_data()
+
+
+
+
+
 
         
 
