@@ -11,13 +11,12 @@ def get_weather_data():
     if response.status_code == 200:
         data = response.json()
         # Traitement des données ici
-        print("Données météo mises à jour avec succès.")
-        with open('api_data.json','w') as file:
-            json.dump(data,file)
-    
+        print("Données météo mises à jour avec succès.",data)
+        #Création Dataframe
+        df_data=pd.Dataframe(data)
     else:
         print("Échec de la requête météo. Code d'état :", response.status_code)
-        
+get_weather_data()
 
 
 
