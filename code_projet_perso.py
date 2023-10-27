@@ -7,7 +7,7 @@ meteo_url = "https://api.open-meteo.com/v1/forecast?latitude=43.6109&longitude=3
 # Dossier où vous stockerez les images des prévisions
 dossier_images = "Image meteo"
 
-def obtenir_previsions_meteo():
+'''def obtenir_previsions_meteo():
     try:
         response = requests.get(meteo_url)
         data = response.json()
@@ -23,7 +23,7 @@ def obtenir_previsions_meteo():
                 image_file.write(response.content)
         
     except Exception as e:
-        print(f"Erreur lors de la récupération des prévisions météo : {e}")
+        print(f"Erreur lors de la récupération des prévisions météo : {e}")'''
 
 if __name__ == "__main__":
     while True:
