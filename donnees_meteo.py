@@ -1,6 +1,7 @@
 import requests
 import json
 import matplotlib.pyplot as plt
+import pandas as pd
 
 def get_weather_data():
     # URL de requête météo
@@ -13,7 +14,17 @@ def get_weather_data():
         # Traitement des données ici
         print("Données météo mises à jour avec succès.",data)
         #Création Dataframe
-        df_data=pd.Dataframe(data)
+        df_data=pd.DataFrame(data)
+        pd.set_option("display.max_rows",None)
+        #Création d'un CSV associé
+        df_data.to_csv("df_data.csv",index=False)
+        #Extraction des données
+        tempmax=data["daily"]["temperature_2m_max"]
+        tempmin=data["daily"]["temperature_2m_min"]
+        sunrice=data ["daily"]["sunrice"]
+        windspeed=data ["daily"]["windspeed_10m_max"]
+        sunset=data ["daily"]["sunset"]
+        
     else:
         print("Échec de la requête météo. Code d'état :", response.status_code)
 get_weather_data()
