@@ -1,6 +1,6 @@
 import requests
 import json
-import matplotlib.pyplot as plt
+from PIL import Image
 import pandas as pd
 import datetime
 
@@ -40,70 +40,35 @@ def get_weather_data():
         print("weather_code",weather_code)
         
     else:
-        print("Échec de la requête météo. Code d'état :", response.status_code)
+        print("Échec de la requête météo. Code d'état :", response.status_code) 
+        # Supposons que 'data' contienne les données météo avec la condition météorologique
+        condition_meteo = data.get("weather_condition", "Inconnu")
+
+        # Associez la condition météorologique à l'image correspondante
+        image_path = get_image_for_weather_condition(condition_meteo)
+
+        if image_path:
+            print(f'Chemin de l\'image météo : {image_path}')
+            # Affichez l'image ici avec Pillow
+            image = Image.open(image_path)
+            image.show()
+        else:
+            print('Image météo non trouvée pour la condition météorologique.')
 
 
-    # Supposons que 'data' contienne les données météo avec le code de condition météorologique.
-    condition_code=data['conditionCode']
+def get_image_for_weather_condition(condition):
+    # Associez les conditions météorologiques aux chemins d'images correspondants
+    conditions_images = {
+        "Ensoleillé": "projet_perso/image_meteo/sun.svg",
+        "Nuageux": "projet_perso/image_meteo/couvert.svg",
+        "Pluvieux": "projet_perso/image_meteo/rain.svg",
+        "Orage": "thunderstorm.png",
+        "Vent": "projet_perso/image_meteo/wind.svg",
+        "Inconnu": "unknown.png"  # Image pour les conditions inconnues
+    }
 
-    # Associez le code de condition météorologique à un fichier d'icône correspondant.
-    icone_meteo = None
-    if condition_code == 800:
-        icone_meteo = 'sun.svg'
-    elif condition_code == 801:
-        icone_meteo = 'couvert(2).svg'
-    elif condition_code==802:
-        icone_meteo== 'wind.svg'
-    elif condition_code==803:
-        icone_meteo=='rain.svg'
-    elif condition_code ==804:
-        icone_meteo=='sunset.svg'
-
-
-    #    Ajoutez d'autres cas selon vos besoins.
-
-    # Mettez à jour le chemin de l'icône appropriée.
-    if icone_meteo:
-         chemin_icone = icone_meteo
-        print(f'Chemin de l\'icône météo : {chemin_icone}')
-    else:
-    print('Code de condition inconnu.')
+    # Récupérez le chemin de l'image en fonction de la condition météorologique
+    return conditions_images.get(condition, None)
 
 get_weather_data()
-
-
-'''import datetime
-
-#Obtenez la date actuelle.
-date_actuelle = datetime.date.today()
-
-# Calculez la date de fin (5 jours à partir de la date actuelle).
-date_fin = date_actuelle + datetime.timedelta(days=5)
-
-# Formattez les dates au format AAAA-MM-JJ.
-date_debut_str = date_actuelle.strftime('%Y-%m-%d')
-date_fin_str = date_fin.strftime('%Y-%m-%d')
-
-# Construisez l'URL avec les dates mises à jour.
-base_url = "https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&longitude=3.8763&current=temperature_2m,precipitation,rain&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,windspeed_10m_max&timezone=Europe%2FBerlin"
-url = f"{base_url}&start_date={date_debut_str}&end_date={date_fin_str}"
-
-print(url)
-
-# URL de requête météo
-    meteo_url = "https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&longitude=3.8763&current=temperature_2m,precipitation,rain&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,windspeed_10m_max&timezone=Europe%2FBerlin&start_date=2023-10-23&end_date=2023-10-27"
-    #Obtenez la date actuelle.
-    date_actuelle = datetime.date.today()
-
-    #Calculez la date de fin (5 jours à partir de la date actuelle).
-    date_fin = date_actuelle + datetime.timedelta(days=5)
-
-    # Formattez les dates au format AAAA-MM-JJ.
-    date_debut_str = date_actuelle.strftime('%Y-%m-%d')
-    date_fin_str = date_fin.strftime('%Y-%m-%d')
-
-    # Construisez l'URL avec les dates mises à jour.
-    base_url = "https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&longitude=3.8763&current=temperature_2m,precipitation,rain&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,windspeed_10m_max&timezone=Europe%2FBerlin"
-    url = f"{base_url}&start_date={date_debut_str}&end_date={date_fin_str}"
-
-    print(url)'''
+get_image_for_weather_condition(condition='Nuageux')
