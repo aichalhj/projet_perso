@@ -75,8 +75,7 @@ df = pd.DataFrame ({
 'Précipitation (mm)': rain })
 print(df)
 
-weather_code = data[0]['hourly']['weathercode']
-
+#Déterminer le jour de la semaine
 def inttoday(i):
     if ((datetime.datetime.now().weekday()+ i)%7 ==0):
         return 'Lundi'
@@ -93,6 +92,62 @@ def inttoday(i):
     else:
         return 'Dimanche'
 inttoday(8)
+
+weather_code = data[0]['hourly']['weathercode']
+print(weather_code)
+
+#Code Météo
+
+condition_image = {
+    0: {'condition': 'Ciel dégagé', 'image': 'sun.svg'},
+    1: {'condition': 'Ciel dégagé', 'image': 'sun.svg'},
+    2: {'condition': 'Ciel partiellement nuageux', 'image': 'Nuageux.svg'},
+    3: {'condition': 'Ciel couvert', 'image': 'couvert.svg'},
+    45: {'condition': 'Brouillard', 'image': 'brouillard.svg'},
+    48: {'condition': 'Brouillard givré', 'image': 'brouillard.svg'},
+    51: {'condition': 'Bruine : Intensité légère', 'image': 'bruine.svg'},
+    53: {'condition': 'Bruine : Intensité modérée', 'image': 'bruine.svg'},
+    55: {'condition': 'Bruine : Intensité dense', 'image': 'bruine.svg'},
+    56: {'condition': 'Bruine verglaçante : Intensité légère', 'image': 'bruine_verglaçante.svg'},
+    57: {'condition': 'Bruine verglaçante : Intensité dense', 'image': 'bruine_verglaçante.svg'},
+    61: {'condition': 'Pluie légère', 'image': 'pluie_legere.svg'},
+    63: {'condition': 'Pluie modérée', 'image': 'pluie_moderee.svg'},
+    65: {'condition': 'Pluie forte', 'image': 'pluie_forte.svg'},
+    66: {'condition': 'Pluie verglaçante', 'image': 'pluie_forte.svg'},
+    71: {'condition': 'Neige', 'image': 'neige.svg'},
+    73: {'condition': 'Neige', 'image': 'neige.svg'},
+    75: {'condition': 'Neige', 'image': 'neige.svg'},
+    80: {'condition': 'Averse légère', 'image': 'averse_legere.svg'},
+    81: {'condition': 'Averse moyenne', 'image': 'averse_moyen.svg'},
+    82: {'condition': 'Averse forte', 'image': 'averse_forte.svg'},
+    95: {'condition': 'Orage', 'image': 'orage.svg'},
+    96: {'condition': 'Orage et grêle', 'image': 'grele.svg'},
+    99: {'condition': 'Orage et grêle', 'image': 'grele.svg'}
+}
+
+# Code météo pour chaque jour (à adapter à votre structure de données)
+
+# Boucle pour chaque jour
+for i in range(5):
+    code_meteo = codes_meteo[i]
+    info_meteo = condition_image.get(code_meteo)
+    
+    if info_meteo:
+        condition = info_meteo['condition']
+        nom_image = info_meteo['image']
+        
+        print(f'Jour {i + 1}:')
+        print(f'Condition météo : {condition}')
+        print(f'Nom de l\'image : {nom_image}')
+        # Charger et afficher l'image
+        try:
+            img = Image.open(nom_image)
+            img.show()
+        except FileNotFoundError:
+            print("L'image associée n'a pas été trouvée.")
+    else:
+        print(f'Jour {i + 1}: Code météo inconnu')
+
 
 
     
