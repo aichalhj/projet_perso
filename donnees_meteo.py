@@ -17,27 +17,30 @@ date_debut_str = date_actuelle.strftime('%Y-%m-%d')
 date_fin_str = date_fin.strftime('%Y-%m-%d')
 
 # Construisez l'URL avec les dates mises à jour.
-base_url = "https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&longitude=3.8763&current=temperature_2m,precipitation,rain,weathercode&hourly=temperature_2m,relativehumidity_2m,rain,snowfall,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,windspeed_10m_max&timezone=Europe%2FBerlin&start_date=2023-10-30&end_date=2023-11-03"
-meteo_url = f"{base_url}&start_date={date_debut_str}&end_date={date_fin_str}"
+base_url = 'https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&longitude=3.8763&hourly=temperature_2m,relativehumidity_2m,precipitation,rain,snowfall,weathercode,windspeed_10m&daily=sunrise,sunset&timezone=Europe%2FBerlin&start_date=2023-10-30&end_date=2023-11-03'
+meteo_url = f'{base_url}&start_date={date_debut_str}&end_date={date_fin_str}'
 
 response = requests.get(meteo_url)
 
 if response.status_code == 200:
     data = response.json()
     # Traitement des données ici
-    print("Données météo mises à jour avec succès.",data)
+    print('Données météo mises à jour avec succès.',data)
     #Création Dataframe
     df_data=pd.DataFrame(data)
-    pd.set_option("display.max_rows",None)
+    pd.set_option('display.max_rows',None)
     #Création d'un CSV associé
-    df_data.to_csv("df_data.csv",index=False)
+    df_data.to_csv('df_data.csv',index=False)
     #Extraction des données
-    temp = data[0]["hourly"]["temperature_2m"]
-    windspeed = data[0]["daily"]["windspeed_10m_max"]
-    sunset = data[0]["daily"]["sunset"]
-    #rain = data[0]["daily"]["precipitation"]
-    sunrise = data[0]["daily"]["sunrise"]
-    humidity = data[0]["hourly"]["relativehumidity_2m"]
+    temp = data[0]['hourly']['temperature_2m']
+    windspeed = data[0]['hourly']['windspeed_10m']
+    sunset = data[0]['daily']['sunset']
+    rain = data[0]['hourly']['precipitation']
+    sunrise = data[0]['daily']['sunrise']
+    humidity = data[0]['hourly']['relativehumidity_2m']
+    snow=data[0]['hourly']['snowfall']
+
+
 
     
 print("la taille est de ",len(temp))
