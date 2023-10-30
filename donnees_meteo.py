@@ -2,6 +2,7 @@ import requests
 import json
 from PIL import Image
 import pandas as pd
+from datetime import datetime
 import datetime
 #from IPython.display import Markdown
 import numpy as np
@@ -56,7 +57,6 @@ for i in range (5):
 print('les températures maxiamals sont,',tempmax)
 print('les températures minimals sont,',tempmin)
 
-
 min_length = min(len(tempmax), len(tempmin), len(windspeed), len(sunrise), len(sunset))
 tempmax = tempmax[:min_length]
 tempmin = tempmin[:min_length]
@@ -64,14 +64,36 @@ windspeed = windspeed[:min_length]
 sunset = sunset[:min_length]
 rain=rain[:min_length]
 sunrise=sunrise[:min_length]
-        
+
 df = pd.DataFrame ({
 "Date": [date_debut_str]*min_length,
-"Température Maximale (°C)": tempmax,
-"Température Minimale (°C)": tempmin,
-"Lever du Soleil": sunrise,
-"Vitesse du Vent Maximale (km/h)": windspeed,
-"Coucher du Soleil": sunset,
-"Précipitation (mm)": rain })
+'Température Maximale (°C)': tempmax,
+'Température Minimale (°C)': tempmin,
+'Lever du Soleil': sunrise,
+'Vitesse du Vent Maximale (km/h)': windspeed,
+'Coucher du Soleil': sunset,
+'Précipitation (mm)': rain })
 print(df)
+
+weather_code = data[0]['hourly']['weathercode']
+
+def inttoday(i):
+    if ((datetime.datetime.now().weekday()+ i)%7 ==0):
+        return 'Lundi'
+    elif ((datetime.datetime.now().weekday()+ i)%7 ==1):
+        return 'Mardi'
+    elif ((datetime.datetime.now().weekday()+ i)%7 ==2):
+        return 'Mercredi'
+    elif ((datetime.datetime.now().weekday()+ i)%7 ==3):
+        return 'Jeudi'
+    elif ((datetime.datetime.now().weekday()+ i)%7 ==4):
+        return 'Vendredi'
+    elif ((datetime.datetime.now().weekday()+ i)%7 ==5):
+        return 'Samedi'
+    else:
+        return 'Dimanche'
+inttoday(8)
+
+
+    
 
