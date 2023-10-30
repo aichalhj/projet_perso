@@ -71,4 +71,4 @@ def get_image_for_weather_condition(condition):
     return conditions_images.get(condition, None)
 
 get_weather_data()
-get_image_for_weather_condition(condition='Nuageux')
+get_image_for_weather_condition()
