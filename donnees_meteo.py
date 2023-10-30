@@ -3,7 +3,8 @@ import json
 from PIL import Image
 import pandas as pd
 import datetime
-from IPython.display import Markdown
+#from IPython.display import Markdown
+import numpy as np
 
 
 #Obtenez la date actuelle.
@@ -39,29 +40,38 @@ if response.status_code == 200:
     sunrise = data[0]['daily']['sunrise']
     humidity = data[0]['hourly']['relativehumidity_2m']
     snow=data[0]['hourly']['snowfall']
-
-
-
     
 print("la taille est de ",len(temp))
-#rain = data ["daily"]["precipitation"]
+tabtemp= np.zeros((5,24))
+k=0
+for i in range (5):
+    for j in range(24):
+        tabtemp[i,j]=temp[k]
+        k+=1
+tempmin=np.zeros(5)
+tempmax=np.zeros(5)
+for i in range (5):
+    tempmin[i]=min(tabtemp[i])
+    tempmax[i]=max(tabtemp[i])
+print('les températures maxiamals sont,',tempmax)
+print('les températures minimals sont,',tempmin)
 
-'''min_length = min(len(tempmax), len(tempmin), len(windspeed), len(sunrise), len(sunset))
-    tempmax = tempmax[:min_length]
-    tempmin = tempmin[:min_length]
-    windspeed = windspeed[:min_length]
-    sunset = sunset[:min_length]
-    #rain=rain[:min_length]
-    sunrise=sunrise[:min_length]
+
+min_length = min(len(tempmax), len(tempmin), len(windspeed), len(sunrise), len(sunset))
+tempmax = tempmax[:min_length]
+tempmin = tempmin[:min_length]
+windspeed = windspeed[:min_length]
+sunset = sunset[:min_length]
+rain=rain[:min_length]
+sunrise=sunrise[:min_length]
         
-    df = pd.DataFrame ({
-    "Date": [date_debut_str]*min_length,
-    "Température Maximale (°C)": tempmax,
-    "Température Minimale (°C)": tempmin,
-    "Lever du Soleil": sunrise,
-    "Vitesse du Vent Maximale (km/h)": windspeed,
-    "Coucher du Soleil": sunset 
-    #"Précipitation (mm)": rain 
-    })
-    print(df)'''
+df = pd.DataFrame ({
+"Date": [date_debut_str]*min_length,
+"Température Maximale (°C)": tempmax,
+"Température Minimale (°C)": tempmin,
+"Lever du Soleil": sunrise,
+"Vitesse du Vent Maximale (km/h)": windspeed,
+"Coucher du Soleil": sunset,
+"Précipitation (mm)": rain })
+print(df)
 
