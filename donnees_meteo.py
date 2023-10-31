@@ -6,6 +6,7 @@ from datetime import datetime
 import datetime
 #from IPython.display import Markdown
 import numpy as np
+from flask import Flask, render_template
 
 
 #Obtenez la date actuelle.
@@ -41,6 +42,7 @@ if response.status_code == 200:
     sunrise = data[0]['daily']['sunrise']
     humidity = data[0]['hourly']['relativehumidity_2m']
     snow=data[0]['hourly']['snowfall']
+
     
 print("la taille est de ",len(temp))
 tabtemp= np.zeros((5,24))
@@ -75,6 +77,7 @@ df = pd.DataFrame ({
 'Précipitation (mm)': rain })
 print(df)
 
+
 #Déterminer le jour de la semaine
 def inttoday(i):
     if ((datetime.datetime.now().weekday()+ i)%7 ==0):
@@ -91,10 +94,10 @@ def inttoday(i):
         return 'Samedi'
     else:
         return 'Dimanche'
-inttoday(8)
+inttoday(i)
 
-weather_code = data[0]['hourly']['weathercode']
-print(weather_code)
+code_meteo = data[0]['hourly']['weathercode']
+print(code_meteo)
 
 #Code Météo
 
@@ -125,28 +128,30 @@ condition_image = {
     99: {'condition': 'Orage et grêle', 'image': 'grele.svg'}
 }
 
-# Code météo pour chaque jour (à adapter à votre structure de données)
-
-# Boucle pour chaque jour
-for i in range(5):
-    code_meteo = codes_meteo[i]
-    info_meteo = condition_image.get(code_meteo)
-    
-    if info_meteo:
-        condition = info_meteo['condition']
-        nom_image = info_meteo['image']
-        
-        print(f'Jour {i + 1}:')
-        print(f'Condition météo : {condition}')
-        print(f'Nom de l\'image : {nom_image}')
-        # Charger et afficher l'image
-        try:
-            img = Image.open(nom_image)
-            img.show()
-        except FileNotFoundError:
-            print("L'image associée n'a pas été trouvée.")
+def get_weather_image(code_meteo):
+    if code_meteo==0 or code_meteo==1:
+        return f"C:/Users/aicha/OneDrive/Bureau/Projet Perso/projet_perso/image_meteo/soleil(2).svg"
+    elif code_meteo==2 or code_meteo==3:
+        return f"C:/Users/aicha/OneDrive/Bureau/Projet Perso/projet_perso/image_meteo/couvert.svg"
+    elif code_meteo==45 or code_meteo==48: 
+        return f"C:/Users/aicha/OneDrive/Bureau/Projet Perso/projet_perso/image_meteo/brouillard.svg"
+    elif code_meteo==51 or code_meteo==53 or code_meteo==55 or code_meteo==56  or code_meteo==57: 
+        return f"C:/Users/aicha/OneDrive/Bureau/Projet Perso/projet_perso/image_meteo/bruine.svg"
+    elif code_meteo==61 or code_meteo==63: 
+        return f"C:/Users/aicha/OneDrive/Bureau/Projet Perso/projet_perso/image_meteo/pluie(2).svg"
+    elif code_meteo==65 or code_meteo==66: 
+        return f"C:/Users/aicha/OneDrive/Bureau/Projet Perso/projet_perso/image_meteo/pluie_forte.svg"
+    elif code_meteo==71 or code_meteo==73 or code_meteo==75:
+        return f"C:/Users/aicha/OneDrive/Bureau/Projet Perso/projet_perso/image_meteo/neige.svg"
+    elif code_meteo==80 or code_meteo==81 or code_meteo==82:
+        return f"C:/Users/aicha/OneDrive/Bureau/Projet Perso/projet_perso/image_meteo/averse.svg"
+    elif code_meteo==95:
+        return f"C:/Users/aicha/OneDrive/Bureau/Projet Perso/projet_perso/image_meteo/orage(2).svg"
+    elif code_meteo==96 or code_meteo==99:
+        return f"C:/Users/aicha/OneDrive/Bureau/Projet Perso/projet_perso/image_meteo/grele.svg"
     else:
-        print(f'Jour {i + 1}: Code météo inconnu')
+        return "image non trouvée"
+get_weather_image(code_meteo)
 
 
 
