@@ -94,9 +94,6 @@ inttoday(i)
 jours_semaine = [inttoday(i) for i in range(min_length)]
 
 code_meteo = data[0]['daily']['weathercode']
-print(code_meteo)
-#Code Météo
-
 
 condition_image = {
     0: {'condition': 'Ciel dégagé', 'image': 'sun.svg'},
@@ -135,7 +132,7 @@ def get_weather_image(i):
     elif code_meteo[i]==51 or code_meteo[i]==53 or code_meteo[i]==55 or code_meteo[i]==56  or code_meteo[i]==57: 
         return f'<img src="imagemeteo/bruine.svg" width=50 height=50/>'
     elif code_meteo[i]==61 or code_meteo[i]==63: 
-        return f'<img src="imagemeteo/rain.svg" width=50 height=50/>'
+        return f'<img src="imagemeteo/pluie (2).svg" width=50 height=50/>'
     elif code_meteo[i]==65 or code_meteo[i]==66: 
         return f'<img src="imagemeteo/pluie_forte.svg" width=50 height=50/>'
     elif code_meteo[i]==71 or code_meteo[i]==73 or code_meteo[i]==75:
@@ -148,7 +145,7 @@ def get_weather_image(i):
         return f'<img src="imagemeteo/grele.svg" width=50 height=50/>'
     else:
         return f"image non trouvée"
-
+#Créez une liste des icones 
 icone=[get_weather_image(i) for i in range(min_length)]
 
 # Créez un DataFrame pour l'affichage avec la date et le jour de la semaine dans une seule colonne
