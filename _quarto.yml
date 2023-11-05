@@ -1,0 +1,28 @@
+project:
+  type: website
+render:
+    -index.qmd
+website:
+  back-to-top-navigation: true
+  page-navigation: true 
+  title: "Prévisions météo de la ville de Montpellier"
+  navbar:
+    left:
+      - href: index.qmd
+      
+format:
+  html:
+    toc: true
+    theme: darkly
+    html-math-method: katex
+    number-sections: false
+    toc-depth: 3
+    code-fold: false
+    code-tools:
+      toggle: false
+      source: false
+    code-overflow: wrap
+    css: styles.css
+
+   
+

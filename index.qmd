@@ -1,3 +1,10 @@
+---
+title: "Prévisions Météo"
+---
+Vous retrouverez ici, la météo de la ville de Montpellier du jour et des quatres prochains jours.
+
+```{python}
+#|code-fold: true
 import requests
 import json
 from PIL import Image
@@ -87,35 +94,10 @@ inttoday(i)
 # Créez une liste des jours de la semaine correspondant à chaque date
 jours_semaine = [inttoday(i) for i in range(min_length)]
 
-# Créez un DataFrame pour l'affichage avec la date et le jour de la semaine dans une seule colonne
-df_display = pd.DataFrame({
-    'Date': [f'{date.strftime("%d/%m/%Y")}- {jour}' for date, jour in zip(pd.date_range(date_debut_str, periods=min_length).date, jours_semaine)],
-     'Température Maximale': [f'{tempmax} °C' for tempmax in tempmax],
-     'Température Minimale': [f'{tempmin} °C' for tempmin in tempmin],
-     'Lever du Soleil': sunrise,
-     'Vitesse du Vent Maximale': [f'{windspeed} km/h' for windspeed in windspeed],
-     'Coucher du Soleil': sunset,
-     'Précipitation': [f'{rain} mm' for rain in rain]
-})
-
-"""# Générez le code HTML du tableau avec la date et le jour de la semaine
-table_html = df_display.to_html(classes=['table', 'table-striped'], escape=False, index=False)
-
-# Affichez le tableau en tant que HTML
-display(HTML(table_html))"""
-# Effectuez la transposition du DataFrame pour échanger les lignes et les colonnes
-df_display_transposed = df_display.T
-
-# Générez le code HTML du tableau avec la date et le jour de la semaine
-table_html = df_display_transposed.to_html(classes=['table'], escape=False, header=False)
-
-# Affichez le tableau en tant que HTML
-display(HTML(table_html))
-
-
 code_meteo = data[0]['daily']['weathercode']
 print(code_meteo)
 #Code Météo
+
 
 condition_image = {
     0: {'condition': 'Ciel dégagé', 'image': 'sun.svg'},
@@ -146,40 +128,50 @@ condition_image = {
 
 def get_weather_image(i):
     if code_meteo[i]==0 or code_meteo[i]==1:
-        return f"imagemeteo/soleil(2).svg"
+        return f'<img src="imagemeteo/soleil(2).svg"/>'
     elif code_meteo[i]==2 or code_meteo[i]==3:
-        return f"imagemeteo/couvert.svg"
+        return f'<img src="imagemeteo/couvert.svg"/>'
     elif code_meteo[i]==45 or code_meteo[i]==48: 
-        return f"imagemeteo/brouillard.svg"
+        return f'<img src="imagemeteo/brouillard.svg"/>'
     elif code_meteo[i]==51 or code_meteo[i]==53 or code_meteo[i]==55 or code_meteo[i]==56  or code_meteo[i]==57: 
-        return f"imagemeteo/bruine.svg"
+        return f'<img src="imagemeteo/bruine.svg"/>'
     elif code_meteo[i]==61 or code_meteo[i]==63: 
-        return f"imagemeteo/pluie(2).svg"
+        return f'<img src="imagemeteo/pluie (2).svg"/>'
     elif code_meteo[i]==65 or code_meteo[i]==66: 
-        return f"imagemeteo/pluie_forte.svg"
+        return f'<img src="imagemeteo/pluie_forte.svg"/>'
     elif code_meteo[i]==71 or code_meteo[i]==73 or code_meteo[i]==75:
-        return f"imagemeteo/neige.svg"
+        return f'<img src="imagemeteo/neige.svg"/>'
     elif code_meteo[i]==80 or code_meteo[i]==81 or code_meteo[i]==82:
-        return f"imagemeteo/averse.svg"
+        return f'<img src="imagemeteo/averse.svg"/>'
     elif code_meteo[i]==95:
-        return f"imagemeteo/orage(2).svg"
+        return f'<img src="imagemeteo/orage(2).svg"/>'
     elif code_meteo[i]==96 or code_meteo[i]==99:
-        return f"imagemeteo/grele.svg"
+        return f'<img src="imagemeteo/grele.svg"/>'
     else:
         return f"image non trouvée"
 print(get_weather_image(2))
 
-#Image.open(get_weather_image(code_meteo))
+icone=[get_weather_image(i) for i in range(min_length)]
 
-# Récupérez le nom du fichier image à afficher
+# Créez un DataFrame pour l'affichage avec la date et le jour de la semaine dans une seule colonne
+df_display = pd.DataFrame({
+    'Date': [f'{date.strftime("%d/%m/%Y")}- {jour}' for date, jour in zip(pd.date_range(date_debut_str, periods=min_length).date, jours_semaine)],
+    'Icone': icone,
+     'Température Maximale': [f'{tempmax} °C' for tempmax in tempmax],
+     'Température Minimale': [f'{tempmin} °C' for tempmin in tempmin],
+     'Lever du Soleil': sunrise,
+     'Vitesse du Vent Maximale': [f'{windspeed} km/h' for windspeed in windspeed],
+     'Coucher du Soleil': sunset,
+     'Précipitation': [f'{rain} mm' for rain in rain]
+})
 
-# Créez la balise HTML pour afficher l'image
-image_html = f"""
-<table>
-    <tr> 
-        <td> <img src= "imagemeteo/wi-thunderstorm.svg" /> </td>
-    </tr>
-</table>
+# Effectuez la transposition du DataFrame pour échanger les lignes et les colonnes
+df_display_transposed = df_display.T
 
-"""
-display(HTML(image_html))
+# Générez le code HTML du tableau avec la date et le jour de la semaine
+table_html = df_display_transposed.to_html(classes=['table'], escape=False, header=False)
+
+# Affichez le tableau en tant que HTML
+display(HTML(table_html))
+
+```

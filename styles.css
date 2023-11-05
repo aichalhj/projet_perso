@@ -1,0 +1,54 @@
+/* css styles */
+
+/* Style du titre principal */
+h1 {
+    color: #021230;
+    text-align: center;
+  }
+
+/*-- scss:defaults --*/
+
+body {
+    background-color: #2d6087;
+    color: white; 
+    background-repeat: no-repeat;
+    /*background-position: center center;*/
+    /*background-attachment: fixed;*/
+  }
+/* Style des tableaux */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #6e9dcf; 
+    color: white; 
+    
+  }
+  
+  table, th, td {
+    border: 1px solid white; /* Bordures blanches autour du tableau */
+    color: white; 
+  }
+  
+  /* Style des en-têtes de tableau */
+  th {
+    background-color: #8ea1b6; /* Couleur de fond bleue plus foncée pour les en-têtes */
+    color: white; 
+  }
+  
+  /* Style des cellules de données */
+  td {
+    padding: 8px; /* Espacement interne pour les cellules de données */
+    color: white; 
+  }
+
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+
