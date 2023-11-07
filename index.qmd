@@ -149,7 +149,7 @@ icone=[get_weather_image(i) for i in range(min_length)]
 # Créez un DataFrame pour l'affichage avec la date et le jour de la semaine dans une seule colonne
 df_display = pd.DataFrame({
     'Date': [f'{date.strftime("%d/%m/%Y")}- {jour}' for date, jour in zip(pd.date_range(date_debut_str, periods=min_length).date, jours_semaine)],
-    'Image': icone,
+    'Icone': icone,
      'Température Maximale': [f'{tempmax} °C' for tempmax in tempmax],
      'Température Minimale': [f'{tempmin} °C' for tempmin in tempmin],
      'Lever du Soleil': sunrise,
