@@ -1,9 +1,7 @@
 import requests
 import json
-from PIL import Image
 import pandas as pd
 import datetime
-from IPython.display import Markdown
 from IPython.display import HTML
 from IPython.display import display
 import numpy as np
