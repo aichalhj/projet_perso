@@ -7,7 +7,6 @@ Vous retrouverez ici, la météo de la ville de Montpellier du jour et des quatr
 #|code-fold: true
 import requests
 import json
-from PIL import Image
 import pandas as pd
 import datetime
 from IPython.display import Markdown
