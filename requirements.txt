@@ -1,4 +1,4 @@
 requests==2.31.0
-pandas==2.1.1p
+pandas==2.1.1
 ipython==8.16.1
 datetime==5.2
