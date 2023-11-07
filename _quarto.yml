@@ -6,7 +6,7 @@ render:
 website:
   back-to-top-navigation: true
   page-navigation: true 
-  title: "Prévisions météo de la ville de Montpellier"
+  title: "Prévisions météo de la ville de Montpellier,"
   navbar:
     left:
       - href: index.qmd
