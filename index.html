@@ -304,7 +304,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a><span class="co"># Créez un DataFrame pour l'affichage avec la date et le jour de la semaine dans une seule colonne</span></span>
 <span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>df_display <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Date'</span>: [<span class="ss">f'</span><span class="sc">{</span>date<span class="sc">.</span>strftime(<span class="st">"</span><span class="sc">%d</span><span class="st">/%m/%Y"</span>)<span class="sc">}</span><span class="ss">- </span><span class="sc">{</span>jour<span class="sc">}</span><span class="ss">'</span> <span class="cf">for</span> date, jour <span class="kw">in</span> <span class="bu">zip</span>(pd.date_range(date_debut_str, periods<span class="op">=</span>min_length).date, jours_semaine)],</span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Image'</span>: icone,</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Icone'</span>: icone,</span>
 <span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>     <span class="st">'Température Maximale'</span>: [<span class="ss">f'</span><span class="sc">{</span>tempmax<span class="sc">}</span><span class="ss"> °C'</span> <span class="cf">for</span> tempmax <span class="kw">in</span> tempmax],</span>
 <span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>     <span class="st">'Température Minimale'</span>: [<span class="ss">f'</span><span class="sc">{</span>tempmin<span class="sc">}</span><span class="ss"> °C'</span> <span class="cf">for</span> tempmin <span class="kw">in</span> tempmin],</span>
 <span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>     <span class="st">'Lever du Soleil'</span>: sunrise,</span>
@@ -334,7 +334,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>11/11/2023- Samedi</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">Image</td>
+<td data-quarto-table-cell-role="th">Icone</td>
 <td><img src="imagemeteo/couvert.svg" width="50"></td>
 <td><img src="imagemeteo/couvert.svg" width="50"></td>
 <td><img src="imagemeteo/pluie (2).svg" width="50"></td>
