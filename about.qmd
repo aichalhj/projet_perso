@@ -9,7 +9,6 @@ About this site
 
 import requests
 import json
-from PIL import Image
 import pandas as pd
 import datetime
 #from IPython.display import Markdown
