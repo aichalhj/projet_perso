@@ -127,25 +127,25 @@ condition_image = {
 
 def get_weather_image(i):
     if code_meteo[i]==0 or code_meteo[i]==1:
-        return f'<img src="imagemeteo/soleil(2).svg"  width=50 height=50/>'
+        return f'<div style="text-align: center;"><img src="imagemeteo/soleil(2).svg"  width=50 height=50/>'
     elif code_meteo[i]==2 or code_meteo[i]==3:
-        return f'<img src="imagemeteo/couvert.svg" width=50 height=50/>'
+        return f'<div style="text-align: center;"><img src="imagemeteo/couvert.svg" width=50 height=50/>'
     elif code_meteo[i]==45 or code_meteo[i]==48: 
-        return f'<img src="imagemeteo/brouillard.svg" width=50 height=50/>'
+        return f'<div style="text-align: center;"><img src="imagemeteo/brouillard.svg" width=50 height=50/>'
     elif code_meteo[i]==51 or code_meteo[i]==53 or code_meteo[i]==55 or code_meteo[i]==56  or code_meteo[i]==57: 
-        return f'<img src="imagemeteo/bruine.svg" width=50 height=50/>'
+        return f'<div style="text-align: center;"><img src="imagemeteo/bruine.svg" width=50 height=50/>'
     elif code_meteo[i]==61 or code_meteo[i]==63: 
-        return f'<img src="imagemeteo/pluie (2).svg" width=50 height=50/>'
+        return f'<div style="text-align: center;"><img src="imagemeteo/pluie (2).svg" width=50 height=50/>'
     elif code_meteo[i]==65 or code_meteo[i]==66: 
-        return f'<img src="imagemeteo/pluie_forte.svg" width=50 height=50/>'
+        return f'<div style="text-align: center;"><img src="imagemeteo/pluie_forte.svg" width=50 height=50/>'
     elif code_meteo[i]==71 or code_meteo[i]==73 or code_meteo[i]==75:
-        return f'<img src="imagemeteo/neige.svg" width=50 height=50/>'
+        return f'<div style="text-align: center;"><img src="imagemeteo/neige.svg" width=50 height=50/>'
     elif code_meteo[i]==80 or code_meteo[i]==81 or code_meteo[i]==82:
-        return f'<img src="imagemeteo/averse.svg" width=50 height=50/>'
+        return f'<div style="text-align: center;"><img src="imagemeteo/averse.svg" width=50 height=50/>'
     elif code_meteo[i]==95:
-        return f'<img src="imagemeteo/orage(2).svg" width=50 height=50/>'
+        return f'<div style="text-align: center;"><img src="imagemeteo/orage(2).svg" width=50 height=50/>'
     elif code_meteo[i]==96 or code_meteo[i]==99:
-        return f'<img src="imagemeteo/grele.svg" width=50 height=50/>'
+        return f'<div style="text-align: center;"><img src="imagemeteo/grele.svg" width=50 height=50/>'
     else:
         return f"image non trouvée"
 #Créez une liste des icones 
