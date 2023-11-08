@@ -45,6 +45,11 @@ if response.status_code == 200:
     sunrise = data[0]['daily']['sunrise']
     humidity = data[0]['hourly']['relativehumidity_2m']
     snow=data[0]['hourly']['snowfall']
+
+    # Remplacer les valeurs manquantes par "-" pour les autres variables
+     rain = [precipitation if not pd.isna(
+        precipitation) else "-" for precipitation in rain]
+
 # Formatez les dates de sunrise et sunset au format '%H:%M'
 for i in range (5):
     sunrise[i] = datetime.datetime.strptime(data[0]['daily']['sunrise'][i], '%Y-%m-%dT%H:%M').strftime('%H:%M')
