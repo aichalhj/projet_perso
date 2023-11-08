@@ -180,7 +180,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>date_fin_str <span class="op">=</span> date_fin.strftime(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Construisez l'URL avec les dates mises à jour.</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">'https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&amp;longitude=3.8763&amp;current=temperature_2m,rain&amp;hourly=temperature_2m,relativehumidity_2m,precipitation,snowfall,windspeed_10m&amp;daily=weathercode,sunrise,sunset&amp;timezone=Europe</span><span class="sc">%2F</span><span class="st">Berlin&amp;start_date=2023-10-31&amp;end_date=2023-11-04'</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">'https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&amp;longitude=3.8763&amp;current=temperature_2m,rain&amp;hourly=temperature_2m,relativehumidity_2m,rain,snowfall,windspeed_10m&amp;daily=weathercode,sunrise,sunset,precipitation_sum&amp;timezone=Europe</span><span class="sc">%2F</span><span class="st">Berlin&amp;start_date=2023-11-08&amp;end_date=2023-11-12'</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>meteo_url <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>base_url<span class="sc">}</span><span class="ss">&amp;start_date=</span><span class="sc">{</span>date_debut_str<span class="sc">}</span><span class="ss">&amp;end_date=</span><span class="sc">{</span>date_fin_str<span class="sc">}</span><span class="ss">'</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(meteo_url)</span>
@@ -196,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> data[<span class="dv">0</span>][<span class="st">'hourly'</span>][<span class="st">'temperature_2m'</span>]</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    windspeed <span class="op">=</span> data[<span class="dv">0</span>][<span class="st">'hourly'</span>][<span class="st">'windspeed_10m'</span>]</span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    sunset <span class="op">=</span> data[<span class="dv">0</span>][<span class="st">'daily'</span>][<span class="st">'sunset'</span>]</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    rain <span class="op">=</span> data[<span class="dv">0</span>][<span class="st">'hourly'</span>][<span class="st">'precipitation'</span>]</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    rain <span class="op">=</span> data[<span class="dv">0</span>][<span class="st">'daily'</span>][<span class="st">'precipitation_sum'</span>]</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    sunrise <span class="op">=</span> data[<span class="dv">0</span>][<span class="st">'daily'</span>][<span class="st">'sunrise'</span>]</span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    humidity <span class="op">=</span> data[<span class="dv">0</span>][<span class="st">'hourly'</span>][<span class="st">'relativehumidity_2m'</span>]</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    snow<span class="op">=</span>data[<span class="dv">0</span>][<span class="st">'hourly'</span>][<span class="st">'snowfall'</span>]</span>
@@ -337,57 +337,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td data-quarto-table-cell-role="th">Icone</td>
 <td><img src="imagemeteo/couvert.svg" width="50"></td>
 <td><img src="imagemeteo/couvert.svg" width="50"></td>
-<td><img src="imagemeteo/pluie (2).svg" width="50"></td>
-<td><img src="imagemeteo/pluie (2).svg" width="50"></td>
+<td><img src="imagemeteo/bruine.svg" width="50"></td>
+<td><img src="imagemeteo/bruine.svg" width="50"></td>
 <td><img src="imagemeteo/bruine.svg" width="50"></td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Température Maximale</td>
-<td>19.1 °C</td>
-<td>19.5 °C</td>
-<td>16.9 °C</td>
-<td>13.8 °C</td>
-<td>15.4 °C</td>
+<td>16.7 °C</td>
+<td>16.2 °C</td>
+<td>14.2 °C</td>
+<td>13.9 °C</td>
+<td>16.5 °C</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Température Minimale</td>
-<td>10.7 °C</td>
-<td>9.9 °C</td>
-<td>11.2 °C</td>
-<td>8.6 °C</td>
-<td>8.4 °C</td>
+<td>5.6 °C</td>
+<td>9.1 °C</td>
+<td>8.2 °C</td>
+<td>6.1 °C</td>
+<td>8.0 °C</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Lever du Soleil</td>
-<td>07:18</td>
-<td>07:19</td>
-<td>07:21</td>
-<td>07:22</td>
-<td>07:23</td>
+<td>07:29</td>
+<td>07:30</td>
+<td>07:31</td>
+<td>07:33</td>
+<td>07:34</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Vitesse du Vent Maximale</td>
-<td>11.2 km/h</td>
-<td>14.4 km/h</td>
-<td>14.3 km/h</td>
-<td>14.0 km/h</td>
-<td>7.1 km/h</td>
+<td>7.9 km/h</td>
+<td>8.7 km/h</td>
+<td>12.2 km/h</td>
+<td>7.8 km/h</td>
+<td>4.2 km/h</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Coucher du Soleil</td>
-<td>17:37</td>
-<td>17:36</td>
-<td>17:34</td>
-<td>17:33</td>
-<td>17:32</td>
+<td>17:27</td>
+<td>17:26</td>
+<td>17:25</td>
+<td>17:23</td>
+<td>17:22</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Précipitation</td>
 <td>0.0 mm</td>
 <td>0.0 mm</td>
-<td>0.0 mm</td>
-<td>0.0 mm</td>
-<td>0.0 mm</td>
+<td>0.2 mm</td>
+<td>1.1 mm</td>
+<td>None mm</td>
 </tr>
 </tbody>
 </table>
