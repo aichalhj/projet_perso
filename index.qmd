@@ -47,7 +47,7 @@ if response.status_code == 200:
     snow=data[0]['hourly']['snowfall']
 
     # Remplacer les valeurs manquantes par "-" pour les autres variables
-     rain = [precipitation if not pd.isna(
+    rain = [precipitation if not pd.isna(
         precipitation) else "-" for precipitation in rain]
 
 # Formatez les dates de sunrise et sunset au format '%H:%M'
