@@ -165,6 +165,5 @@ table_html = df_display_transposed.to_html(classes=['table'], escape=False, head
 # Affichez le tableau en tant que HTML
 display(HTML(table_html))
 
-https://api.open-meteo.com/v1/meteofrance?latitude=43.6109&longitude=3.8763&current=temperature_2m,rain&hourly=temperature_2m,relativehumidity_2m,precipitation,snowfall,windspeed_10m&daily=weathercode,sunrise,sunset&timezone=Europe%2FBerlin&start_date=2023-10-31&end_date=2023-11-04
 
 ```
